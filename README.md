@@ -58,7 +58,3 @@ We built a **Streamlit web app** for real-time recommendations:
 4. **For new users**, we recommend the **most popular products globally** as we didn't have their metadata.
 5. Implemented a **stock availability check** and **displayed recommendations in a structured card format** with a **custom background and styled UI elements**.
 
----
-
-### **Final Thoughts**
-This system enables **intelligent, data-driven recommendations**, incorporating **behavioral insights and user metadata** to enhance accuracy. The **hybrid approach** allows for both **personalized** and **cold-start recommendations**, making it a **scalable and effective solution** for diverse user bases.
