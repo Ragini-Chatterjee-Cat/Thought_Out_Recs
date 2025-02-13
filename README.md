@@ -16,7 +16,7 @@ To train the neural network, we **converted these items into numerical indices**
 ## Including Metadata for Cold-Start Support
 To address the **cold-start problem**, we included user attributes (**segment, country, gender**) and applied **one-hot encoding** to create feature vectors. We excluded **age** as it was not usable. 
 
-Users are now represented **not only by their ID but also by their metadata embeddings**. However, users must have **valid metadata** for this approach to work effectively.
+Users are now represented **not only by their ID but also by their metadata embeddings**. However, users must have **valid metadata** for this approach to work effectively.Note:  If compute_user_features() returns all zeros, the content-based branch doesn't contribute to personalization.
 
 After processing, we **formatted our data as tensors** and split it into **80% training and 20% testing**.
 
@@ -44,7 +44,7 @@ Ensures the **preferred item** has a **higher score** than the **dispreferred it
 ### **2. KL-Divergence Loss (Regularization)**
 - Prevents **overfitting** by aligning the model’s predictions with a reference model.
 - Helps stabilize learning and avoid extreme predictions.
-- Both losses are combined with **alpha = 0.05**.
+- Both losses are combined with **alpha = 0.1**.
 
 We trained the model for **10 epochs**, as validation loss increased beyond this point.
 
