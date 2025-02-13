@@ -24,6 +24,14 @@ After processing, we **formatted our data as tensors** and split it into **80% t
 ---
 
 ## The Model
+We tried multiple models like: 
+1. Item-based Collaborative Filtering + Association Rule (predictions can be found in the zipped json files)
+2.  ALS (Alternating Least Squares Algorithm)
+3.  Graph Neural Network + Cold Start
+4.  NCF (files can also be found in the repo)
+5.  The Hybrid Recommendation: the following sections talk about that:
+
+   
 Our model is a **Hybrid Recommendation System** that combines:
 1. **Collaborative Filtering (CF)** for **user-item interactions**.
 2. **Content-Based Filtering (CBF)** to **process user metadata**.
