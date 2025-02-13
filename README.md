@@ -1,5 +1,6 @@
 # Thought Out Recs
 
+## Run: streamlit run RC-1.py after cloning repository for the streamlit app
 ## The Data
 We used **Spark** to load the data as it was the only way we could effectively handle large datasets. We then merged the data using the **IDs**, focusing on **transactions** to ensure our model learns from customer behavior. 
 
