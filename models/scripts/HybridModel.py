@@ -74,7 +74,7 @@ def hybrid_pairwise_kl_loss(model, reference, user_ids, item_i, item_j, alpha=0.
 # ----------------------------------------------------
 def prepare_data():
     """Loads and preprocesses data for training."""
-    print("🔹 Loading dataset...")
+    print("Loading dataset...")
     data_frames = load_data()
 
     transactions_pdf = data_frames["transactions"]
@@ -100,7 +100,7 @@ def prepare_data():
 # ----------------------------------------------------
 def train_model(model, train_loader, test_loader, epochs=10, alpha=0.05):
     """Trains the hybrid recommendation model."""
-    print("🚀 Training Hybrid Model...")
+    print("Training Hybrid Model...")
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
     train_losses = []
@@ -122,7 +122,7 @@ def train_model(model, train_loader, test_loader, epochs=10, alpha=0.05):
 
     # Save Model
     torch.save(model, MODEL_PATH)
-    print(f"✅ Model trained and saved at: {MODEL_PATH}")
+    print(f"Model trained and saved at: {MODEL_PATH}")
 
     return train_losses
 
@@ -132,11 +132,11 @@ def train_model(model, train_loader, test_loader, epochs=10, alpha=0.05):
 # ----------------------------------------------------
 def load_trained_model(model_path, num_users, num_items):
     """Loads a trained hybrid recommendation model."""
-    print(f"📂 Loading model from {model_path}...")
+    print(f"Loading model from {model_path}...")
     model = HybridPreferenceModel(num_users, num_items)
     model.load_state_dict(torch.load(model_path).state_dict())
     model.eval()
-    print("✅ Model loaded successfully!")
+    print("Model loaded successfully!")
     return model
 
 
@@ -146,7 +146,7 @@ def load_trained_model(model_path, num_users, num_items):
 def recommend_for_user(model, user2idx, item2idx, user_id, top_n=5):
     """Recommends top N products for a given user."""
     if user_id not in user2idx:
-        print("⚠️ User ID not found!")
+        print("User ID not found!")
         return None
 
     user_idx = user2idx[user_id]
@@ -164,21 +164,29 @@ def recommend_for_user(model, user2idx, item2idx, user_id, top_n=5):
     return recommended_product_ids
 
 
-# ----------------------------------------------------
 # 8. Main Execution
 # ----------------------------------------------------
 if __name__ == "__main__":
+    # Load preprocessed data
     train_loader, test_loader, num_users, num_items, user2idx, item2idx = prepare_data()
 
+    # Check if a pre-trained model exists
     if os.path.exists(MODEL_PATH):
-        print(f"✅ Found existing Hybrid model: {MODEL_PATH}")
+        print(f"Found existing Hybrid model: {MODEL_PATH}")
         hybrid_model = load_trained_model(MODEL_PATH, num_users, num_items)
     else:
-        print("🚀 No trained model found. Training a new one...")
+        print("No trained model found. Training a new one...")
         hybrid_model = HybridPreferenceModel(num_users, num_items)
         train_model(hybrid_model, train_loader, test_loader)
+
+    print("Hybrid Model Ready!")
 
     # Test recommendation
     test_user_id = 7673687066317773168  # Example user
     recommendations = recommend_for_user(hybrid_model, user2idx, item2idx, test_user_id)
-    print(f"📌 Recommended Products for User {test_user_id}: {recommendations}")
+    print(f"Recommended Products for User {test_user_id}: {recommendations}")
+
+    # Test recommendation
+    test_user_id = 7673687066317773168  # Example user
+    recommendations = recommend_for_user(hybrid_model, user2idx, item2idx, test_user_id)
+    print(f"Recommended Products for User {test_user_id}: {recommendations}")
