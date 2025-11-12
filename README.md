@@ -2,6 +2,8 @@
 
 A sophisticated hybrid recommendation system combining collaborative filtering and content-based filtering techniques. Built with PyTorch and deployed as an interactive Streamlit web application.
 
+**Note**: This project was created as an academic project. The original dataset is not included in this repository. To use this system, you'll need to provide your own data (see [Data Requirements](#data-format) below).
+
 ## Quick Start
 
 ```bash
@@ -113,8 +115,8 @@ pip install -r requirements.txt
 ```
 
 4. **Prepare data**:
-   - Place your transaction data in the appropriate directory
-   - Update data paths in the notebook/scripts as needed
+   - Place your CSV files (clients.csv, products.csv, stocks.csv, stores.csv, transactions.csv) in your desired directory
+   - Update the `SHARED_FOLDER_PATH` variable in `models/scripts/data_loader.py` to point to your data directory
 
 ## Usage
 
